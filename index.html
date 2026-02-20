@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Pulse — AI News for HR, Finance & Enterprise Teams</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pank: #EC2059;
+    --pank-dark: #C91A4A;
+    --pank-light: #FFF0F4;
+    --pank-glow: rgba(236, 32, 89, 0.06);
+    --pank-10: rgba(236, 32, 89, 0.10);
+    --pank-15: rgba(236, 32, 89, 0.15);
+    --charcoal: #2A2C35;
+    --charcoal-mid: #3A3C45;
+    --charcoal-light: #5A5C65;
+    --gray-50: #FAFAFA;
+    --gray-100: #F4F4F6;
+    --gray-200: #E8E8EC;
+    --gray-300: #D1D1D6;
+    --gray-400: #9A9AA0;
+    --white: #FEFEFE;
+    --purple: #5856D6;
+    --green: #30B856;
+    --orange: #F5A623;
+    --blue: #3B82F6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--charcoal);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ============================================
+     NAV
+  ============================================ */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(254, 254, 254, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--gray-200);
+    transition: all 0.3s ease;
+  }
+  .nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--charcoal);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-brand span { color: var(--pank); }
+  .nav-chevron {
+    width: 22px;
+    height: 22px;
+    background: var(--pank);
+    clip-path: polygon(25% 0%, 100% 50%, 25% 100%);
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--charcoal-light);
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.1px;
+  }
+  .nav-links a:hover { color: var(--pank); }
+  .nav-cta {
+    background: var(--pank) !important;
+    color: var(--white) !important;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    transition: background 0.2s, transform 0.15s !important;
+  }
+  .nav-cta:hover {
+    background: var(--pank-dark) !important;
+    transform: translateY(-1px);
+  }
+
+  /* ============================================
+     HERO
+  ============================================ */
+  .hero {
+    padding: 160px 32px 100px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(236, 32, 89, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--pank-light);
+    color: var(--pank);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 28px;
+    letter-spacing: 0.3px;
+    animation: fadeInUp 0.6s ease both;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--pank);
+    border-radius: 50%;
+    animation: blink 2s infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .hero h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(42px, 6vw, 68px);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -2px;
+    color: var(--charcoal);
+    max-width: 720px;
+    margin: 0 auto 24px;
+    animation: fadeInUp 0.6s ease 0.1s both;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--pank);
+    position: relative;
+  }
+  .hero h1 em::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--pank-15);
+    border-radius: 2px;
+  }
+  .hero p {
+    font-size: 18px;
+    color: var(--charcoal-light);
+    max-width: 520px;
+    margin: 0 auto 40px;
+    line-height: 1.65;
+    animation: fadeInUp 0.6s ease 0.2s both;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Subscribe Form */
+  .subscribe-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 440px;
+    margin: 0 auto;
+    animation: fadeInUp 0.6s ease 0.3s both;
+  }
+  .subscribe-form input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s;
+    background: var(--white);
+  }
+  .subscribe-form input::placeholder { color: var(--gray-400); }
+  .subscribe-form input:focus { border-color: var(--pank); }
+  .subscribe-form button {
+    padding: 14px 28px;
+    background: var(--pank);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .subscribe-form button:hover {
+    background: var(--pank-dark);
+    transform: translateY(-1px);
+  }
+  .hero-proof {
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--gray-400);
+    animation: fadeInUp 0.6s ease 0.4s both;
+  }
+
+  /* ============================================
+     TOPICS BAR
+  ============================================ */
+  .topics {
+    border-top: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+    background: var(--gray-50);
+    padding: 0 32px;
+  }
+  .topics-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 0;
+    flex-wrap: wrap;
+  }
+  .topic-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1.5px solid var(--gray-200);
+    background: var(--white);
+    color: var(--charcoal-mid);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .topic-tag:hover {
+    border-color: var(--pank);
+    color: var(--pank);
+    background: var(--pank-light);
+  }
+  .topic-active {
+    border-color: var(--pank) !important;
+    background: var(--pank-light) !important;
+    color: var(--pank) !important;
+  }
+
+  /* ============================================
+     FEATURED ARTICLE
+  ============================================ */
+  .featured {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 64px 32px 0;
+  }
+  .featured-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    background: var(--charcoal);
+    border-radius: 20px;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .featured-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(236, 32, 89, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .featured-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--pank);
+    margin-bottom: 16px;
+  }
+  .featured-card h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+  .featured-card p {
+    font-size: 15px;
+    color: var(--gray-300);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .featured-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--pank);
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: gap 0.2s;
+  }
+  .featured-link:hover { gap: 12px; }
+  .featured-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .featured-meta span {
+    font-size: 13px;
+    color: var(--gray-400);
+  }
+  .featured-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+  }
+  .featured-stat {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 20px 24px;
+    backdrop-filter: blur(10px);
+  }
+  .featured-stat-number {
+    font-family: 'Sora', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--pank);
+    letter-spacing: -1px;
+  }
+  .featured-stat-label {
+    font-size: 13px;
+    color: var(--gray-400);
+    margin-top: 4px;
+  }
+
+  /* ============================================
+     ARTICLE GRID
+  ============================================ */
+  .articles {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 64px 32px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+  .section-header h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .section-header a {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--pank);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.2s;
+  }
+  .section-header a:hover { gap: 8px; }
+  .section-header a::after { content: '→'; }
+
+  .article-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .article-card {
+    border: 1px solid var(--gray-200);
+    border-radius: 16px;
+    padding: 28px;
+    background: var(--white);
+    transition: all 0.25s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+  .article-card:hover {
+    border-color: var(--pank);
+    box-shadow: 0 8px 32px rgba(236, 32, 89, 0.08);
+    transform: translateY(-3px);
+  }
+  .card-category {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cat-workday { color: var(--pank); }
+  .cat-hrtech { color: var(--purple); }
+  .cat-finance { color: var(--green); }
+  .cat-general { color: var(--blue); }
+  .cat-howto { color: var(--orange); }
+
+  .article-card h3 {
+    font-family: 'Sora', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.2px;
+    margin-bottom: 10px;
+    color: var(--charcoal);
+  }
+  .article-card p {
+    font-size: 14px;
+    color: var(--charcoal-light);
+    line-height: 1.55;
+    flex: 1;
+  }
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-100);
+  }
+  .card-source {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-400);
+  }
+  .card-date {
+    font-size: 12px;
+    color: var(--gray-400);
+  }
+  .card-arrow {
+    font-size: 16px;
+    color: var(--pank);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.2s;
+  }
+  .article-card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* ============================================
+     HOW-TO SECTION
+  ============================================ */
+  .howto {
+    background: var(--gray-50);
+    border-top: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 64px 32px;
+  }
+  .howto-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .howto-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .howto-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px 28px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 14px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.25s ease;
+  }
+  .howto-card:hover {
+    border-color: var(--pank);
+    box-shadow: 0 4px 20px rgba(236, 32, 89, 0.06);
+    transform: translateY(-2px);
+  }
+  .howto-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .howto-icon-pank { background: var(--pank-light); }
+  .howto-icon-purple { background: #F0F0FF; }
+  .howto-icon-green { background: #EDFAF0; }
+  .howto-icon-orange { background: #FFF8ED; }
+  .howto-content h4 {
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.1px;
+  }
+  .howto-content p {
+    font-size: 13px;
+    color: var(--charcoal-light);
+    line-height: 1.5;
+  }
+  .howto-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--pank);
+    background: var(--pank-light);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+    display: inline-block;
+  }
+
+  /* ============================================
+     NEWSLETTER CTA
+  ============================================ */
+  .newsletter-cta {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 80px 32px;
+  }
+  .cta-card {
+    background: var(--charcoal);
+    border-radius: 24px;
+    padding: 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-card::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(236, 32, 89, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .cta-card h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .cta-card h2 em {
+    font-style: normal;
+    color: var(--pank);
+  }
+  .cta-card p {
+    font-size: 16px;
+    color: var(--gray-300);
+    max-width: 440px;
+    margin: 0 auto 32px;
+    position: relative;
+  }
+  .cta-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 420px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .cta-form input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.06);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .cta-form input::placeholder { color: var(--gray-400); }
+  .cta-form input:focus { border-color: var(--pank); }
+  .cta-form button {
+    padding: 14px 28px;
+    background: var(--pank);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .cta-form button:hover {
+    background: var(--pank-dark);
+    transform: translateY(-1px);
+  }
+  .cta-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 20px;
+    position: relative;
+  }
+  .cta-details span {
+    font-size: 13px;
+    color: var(--gray-400);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cta-details span::before {
+    content: '✓';
+    color: var(--pank);
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  /* ============================================
+     FOOTER
+  ============================================ */
+  footer {
+    border-top: 1px solid var(--gray-200);
+    padding: 40px 32px;
+  }
+  .footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-brand {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--charcoal);
+  }
+  .footer-brand span { color: var(--pank); }
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 13px;
+    color: var(--gray-400);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--pank); }
+  .footer-copy {
+    font-size: 12px;
+    color: var(--gray-300);
+  }
+
+  /* ============================================
+     RESPONSIVE
+  ============================================ */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero { padding: 120px 24px 64px; }
+    .hero h1 { font-size: 36px; letter-spacing: -1px; }
+    .hero p { font-size: 16px; }
+    .subscribe-form { flex-direction: column; }
+    .subscribe-form input, .subscribe-form button { width: 100%; }
+    .featured-card { grid-template-columns: 1fr; padding: 32px; gap: 32px; }
+    .article-grid { grid-template-columns: 1fr; }
+    .howto-grid { grid-template-columns: 1fr; }
+    .cta-card { padding: 40px 24px; }
+    .cta-card h2 { font-size: 28px; }
+    .cta-form { flex-direction: column; }
+    .cta-form input, .cta-form button { width: 100%; }
+    .cta-details { flex-direction: column; gap: 8px; }
+    .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+    .topics-inner { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <div class="nav-chevron"></div>
+      The AI <span>Pulse</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#articles">News</a></li>
+      <li><a href="#howto">How-To</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#subscribe" class="nav-cta">Subscribe</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Live — Updated Weekly</div>
+  <h1>AI news for teams that run on <em>Workday</em></h1>
+  <p>Curated AI intelligence for HR, Finance, and enterprise systems teams. One briefing. Every Friday. No fluff.</p>
+  <div class="subscribe-form">
+    <input type="email" placeholder="you@company.com">
+    <button>Subscribe Free</button>
+  </div>
+  <p class="hero-proof">Join 0 readers — launching soon</p>
+</section>
+
+<!-- TOPICS -->
+<div class="topics">
+  <div class="topics-inner">
+    <a href="#" class="topic-tag topic-active">🔥 All</a>
+    <a href="#" class="topic-tag">💼 Workday</a>
+    <a href="#" class="topic-tag">🧑‍💼 HR Tech</a>
+    <a href="#" class="topic-tag">💰 Finance AI</a>
+    <a href="#" class="topic-tag">🤖 General AI</a>
+    <a href="#" class="topic-tag">🛠️ Tools</a>
+    <a href="#" class="topic-tag">📘 How-To</a>
+  </div>
+</div>
+
+<!-- FEATURED -->
+<section class="featured">
+  <div class="featured-card">
+    <div>
+      <div class="featured-label">🔥 THIS WEEK'S LEAD</div>
+      <h2>Workday's Co-Founder Returns as CEO with a $139M AI Mandate</h2>
+      <p>Aneel Bhusri replaces Carl Eschenbach with a clear mission: make Workday an AI-first company. Stock down ~30% YTD as agentic AI threatens the SaaS model your team depends on.</p>
+      <a href="#" class="featured-link">Read full story <span>→</span></a>
+      <div class="featured-meta">
+        <span>Fortune</span>
+        <span>·</span>
+        <span>Feb 13, 2026</span>
+      </div>
+    </div>
+    <div class="featured-visual">
+      <div class="featured-stat">
+        <div class="featured-stat-number">30%</div>
+        <div class="featured-stat-label">Workday YTD stock decline</div>
+      </div>
+      <div class="featured-stat">
+        <div class="featured-stat-number">$139M</div>
+        <div class="featured-stat-label">Bhusri's return compensation package</div>
+      </div>
+      <div class="featured-stat">
+        <div class="featured-stat-number">2026</div>
+        <div class="featured-stat-label">Goldman calls it "critical year" for WDay AI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section class="articles" id="articles">
+  <div class="section-header">
+    <h2>This Week</h2>
+    <a href="#">View all</a>
+  </div>
+  <div class="article-grid">
+
+    <a href="#" class="article-card">
+      <div class="card-category cat-workday">⚖️ WORKDAY</div>
+      <h3>AI Bias Lawsuit Moves Forward — Opt-In Deadline March 7</h3>
+      <p>Mobley v. Workday alleges AI screening discriminates by age, race, and disability. 1.1B applications rejected via these tools.</p>
+      <div class="card-footer">
+        <span class="card-source">OutSolve</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="#" class="article-card">
+      <div class="card-category cat-finance">🏦 FINANCE AI</div>
+      <h3>Goldman Sachs Building AI Agents for Accounting with Anthropic</h3>
+      <p>Co-developing autonomous agents for trade accounting and client onboarding. Goal: constrain future headcount growth.</p>
+      <div class="card-footer">
+        <span class="card-source">CNBC</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="#" class="article-card">
+      <div class="card-category cat-hrtech">📊 HR TECH</div>
+      <h3>CFOs Slashing Headcount, Surging AI Spend</h3>
+      <p>Gartner: headcount growth expectations collapsed 6% → 2%. HR budgets weakest of 9 functions surveyed.</p>
+      <div class="card-footer">
+        <span class="card-source">Journal of Accountancy</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="#" class="article-card">
+      <div class="card-category cat-workday">🛠️ WORKDAY</div>
+      <h3>Workday Payroll Agent: Real-World Case Study</h3>
+      <p>University payroll director automates missing-data scans and minimum wage change alerts using Workday's new agent features.</p>
+      <div class="card-footer">
+        <span class="card-source">Washington Post</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="#" class="article-card">
+      <div class="card-category cat-general">🤖 GENERAL AI</div>
+      <h3>Claude Sonnet 4.6 Ships — Near-Opus at Sonnet Pricing</h3>
+      <p>1M token context window, major coding and computer-use upgrades. Now default across free and paid plans.</p>
+      <div class="card-footer">
+        <span class="card-source">Anthropic</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+    <a href="#" class="article-card">
+      <div class="card-category cat-general">⚡ GENERAL AI</div>
+      <h3>Microsoft AI CEO: All Professional Tasks Automated in 18 Months</h3>
+      <p>Suleyman calls out accounting, legal, and project management as most exposed. Markets reacting sharply.</p>
+      <div class="card-footer">
+        <span class="card-source">HR Grapevine</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- HOW-TO -->
+<section class="howto" id="howto">
+  <div class="howto-inner">
+    <div class="section-header">
+      <h2>How-To Guides</h2>
+      <a href="#">View all</a>
+    </div>
+    <div class="howto-grid">
+
+      <a href="#" class="howto-card">
+        <div class="howto-icon howto-icon-pank">🤖</div>
+        <div class="howto-content">
+          <h4>Automate Your AI Newsletter with n8n + Claude</h4>
+          <p>Build a fully automated weekly briefing that researches, writes, and posts to Slack every Friday.</p>
+          <span class="howto-tag">Automation</span>
+        </div>
+      </a>
+
+      <a href="#" class="howto-card">
+        <div class="howto-icon howto-icon-purple">📋</div>
+        <div class="howto-content">
+          <h4>Getting Started with Workday's AI Agent Features</h4>
+          <p>A practical walkthrough of Payroll Agent, Candidate Skills Match, and what's coming next.</p>
+          <span class="howto-tag">Workday</span>
+        </div>
+      </a>
+
+      <a href="#" class="howto-card">
+        <div class="howto-icon howto-icon-green">⚙️</div>
+        <div class="howto-content">
+          <h4>AI Governance Checklist for HR Teams</h4>
+          <p>Protect your org from bias lawsuits and compliance gaps with this framework.</p>
+          <span class="howto-tag">Compliance</span>
+        </div>
+      </a>
+
+      <a href="#" class="howto-card">
+        <div class="howto-icon howto-icon-orange">💡</div>
+        <div class="howto-content">
+          <h4>Using Claude to Audit Workday Reports</h4>
+          <p>Upload reports, spot anomalies, and generate summaries in minutes instead of hours.</p>
+          <span class="howto-tag">Productivity</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="newsletter-cta" id="subscribe">
+  <div class="cta-card">
+    <h2>Stay sharp. <em>Every Friday.</em></h2>
+    <p>The AI news that matters for your HR and Finance stack — curated, concise, and free.</p>
+    <div class="cta-form">
+      <input type="email" placeholder="you@company.com">
+      <button>Subscribe</button>
+    </div>
+    <div class="cta-details">
+      <span>Free forever</span>
+      <span>Every Friday at noon</span>
+      <span>Unsubscribe anytime</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">The AI <span>Pulse</span></div>
+    <ul class="footer-links">
+      <li><a href="#">News</a></li>
+      <li><a href="#">How-To</a></li>
+      <li><a href="#">Tools</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 The AI Pulse</div>
+  </div>
+</footer>
+
+<script>
+  // Topic filter interaction
+  document.querySelectorAll('.topic-tag').forEach(tag => {
+    tag.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelectorAll('.topic-tag').forEach(t => t.classList.remove('topic-active'));
+      tag.classList.add('topic-active');
+    });
+  });
+</script>
+
+</body>
+</html>
